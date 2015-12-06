@@ -10,7 +10,7 @@ public class SequenceGenerator
 		{
 		case SHELL_1959: return genShellSequence(N);
 		case FRANK_LAZARUS_1960: return genFrankLazarusSequence(N);
-		default: return null;
+		default: return new int[0];
 		}
 	}
 	
