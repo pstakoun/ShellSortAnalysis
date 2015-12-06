@@ -7,15 +7,21 @@ import java.util.Random;
 public class Main
 {
 	public static enum Sequence {
-		SHELL_1959, FRANK_LAZARUS_1960
+		CIURA,
+		FRANK_LAZARUS,
+		HIBBARD,
+		KNUTH,
+		SEDGEWICK,
+		SHELL,
+		TOKUDA
 	}
 	
 	private static final String file = "results.csv";
 	private static final float trials = 10f;
 	private static final int maxN = 500000;
 	private static final int inc = 1000;
-	private static final int numSequences = 2;
 	private static final Sequence[] sequences = Sequence.values();
+	private static final int numSequences = sequences.length;
 	
 	private static FileWriter writer;
 	private static Sorter sorter;
@@ -49,8 +55,11 @@ public class Main
 			}
 		}
 		
-		for (int i = 0; i < maxN/inc+1; i++)
-			writer.append(times[i][0]+","+times[i][1]+","+times[i][2]+"\n");
+		for (int i = 0; i < maxN/inc+1; i++) {
+			for (int j = 0; j < numSequences+1; j++)
+				writer.append(times[i][j]+",");
+			writer.append("\n");
+		}
 		
 		writer.flush();
 		writer.close();
