@@ -38,11 +38,12 @@ public class Main
 		random = new Random();
 		times = new double[maxN/inc+1][numSequences+1];
 		
-		for (int i = 0; i < maxN/inc+1; i++)
+		for (int i = 0; i <= maxN/inc; i++)
 			times[i][0] = i*inc;
 
-		for (int i = 1; i < numSequences+1; i++) {
+		for (int i = 1; i <= numSequences; i++) {
 			sequence = sequences[i-1];
+			long start = System.currentTimeMillis();
 			for (int N = 0; N <= maxN; N += inc) {
 				sorter.setSequence(sequenceGenerator.genSequence(sequence, N));
 				long total = 0;
@@ -51,13 +52,13 @@ public class Main
 				}
 				double avg = total / trials;
 				times[N/inc][i] = avg;
-				System.out.println(sequence.name()+"; "+N+"; "+avg);
 			}
+			System.out.println(sequence.name()+" completed in "+(System.currentTimeMillis()-start)+" ms");
 		}
 		
-		for (int i = 0; i < maxN/inc+1; i++) {
-			for (int j = 0; j < numSequences+1; j++)
-				writer.append(times[i][j]+",");
+		for (int i = 0; i <= maxN/inc; i++) {
+			for (int j = 0; j <= numSequences; j++)
+				writer.append(times[i][j]+(j!=numSequences?",":""));
 			writer.append("\n");
 		}
 		
