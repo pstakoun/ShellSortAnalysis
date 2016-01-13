@@ -41,20 +41,21 @@ public class Main
 		for (int i = 0; i <= maxN/inc; i++)
 			times[i][0] = i*inc;
 
+		long start = System.currentTimeMillis();
 		for (int i = 1; i <= numSequences; i++) {
 			sequence = sequences[i-1];
-			long start = System.currentTimeMillis();
+			long seqStart = System.currentTimeMillis();
 			for (int N = 0; N <= maxN; N += inc) {
 				sorter.setSequence(sequenceGenerator.genSequence(sequence, N));
 				long total = 0;
-				for (int t = 0; t < trials; t++) {
+				for (int t = 0; t < trials; t++)
 					total += sorter.sort(getRandomArray(N));
-				}
 				double avg = total / trials;
 				times[N/inc][i] = avg;
 			}
-			System.out.println(sequence.name()+" completed in "+(System.currentTimeMillis()-start)+" ms");
+			System.out.println(sequence.name()+" completed in "+(System.currentTimeMillis()-seqStart)+" ms");
 		}
+		System.out.println("Completed in "+(System.currentTimeMillis()-start)+" ms");
 		
 		for (int i = 0; i <= maxN/inc; i++) {
 			for (int j = 0; j <= numSequences; j++)
@@ -69,9 +70,8 @@ public class Main
 	public static int[] getRandomArray(int N)
 	{
 		int[] array = new int[N];
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < N; i++)
 			array[i] = getRandom(N);
-		}
 		return array;
 	}
 	

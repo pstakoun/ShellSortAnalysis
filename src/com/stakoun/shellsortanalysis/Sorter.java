@@ -11,9 +11,8 @@ public class Sorter
 			for (int i = gap; i < array.length; i++) {
 	            int val = array[i];
 	            int j;
-	            for (j = i; j >= gap && array[j - gap] > val; j -= gap) {
+	            for (j = i; j >= gap && array[j - gap] > val; j -= gap)
 	                array[j] = array[j - gap];
-	            }
 	            array[j] = val;
 	        }
 		}
